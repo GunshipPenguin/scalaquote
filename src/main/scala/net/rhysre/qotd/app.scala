@@ -4,9 +4,9 @@ import java.lang.Thread
 import java.io.{File, FileInputStream, FileNotFoundException}
 
 object Qotd {
-  case class Config (port: Int, quoteFile: String)
+  case class Config (port: Int, quoteFile: String, strictMode: Boolean)
 
-  val defaultConfig = new Config(17, "quotes.txt")
+  val defaultConfig = new Config(17, "quotes.txt", false)
 
   def main(args: Array[String]) = {
     val config = parseArgs(defaultConfig, args.toList)
@@ -14,7 +14,7 @@ object Qotd {
     try {
       val quoteInputStream = getQuoteInputStream(config.quoteFile)
 
-      val reader = new QuoteReader(quoteInputStream)
+      val reader = new QuoteReader(quoteInputStream, config.strictMode)
 
       val tcpThread = startTcpServer(config.port, reader)
       val udpThread = startUdpServer(config.port, reader)
@@ -35,6 +35,7 @@ object Qotd {
     argList match {
       case "--port" :: port :: tail => parseArgs(config.copy(port = port.toInt), tail)
       case "--quotefile" :: quoteFile :: tail => parseArgs(config.copy(quoteFile = quoteFile), tail)
+      case "--strict" :: tail => parseArgs(config.copy(strictMode = true), tail)
       case option :: value :: tail => parseArgs(config, tail)
       case option :: Nil => config
       case Nil => config
