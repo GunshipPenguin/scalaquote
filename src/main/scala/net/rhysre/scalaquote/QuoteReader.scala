@@ -4,7 +4,7 @@ import scala.io.Source
 import scala.util.Random
 import java.io.InputStream
 
-class QuoteReader (in: InputStream, strictMode: Boolean) {
+class QuoteReader (in: InputStream, strictMode: Boolean = false) {
   val rawInputLines = Source.fromInputStream(in).mkString.split("%\n")
 
   // Remove quotes that do not comply with RFC865 if strict mode is enabled
