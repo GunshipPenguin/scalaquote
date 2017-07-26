@@ -3,19 +3,17 @@ package net.rhysre.scalaquote
 import java.lang.Thread
 
 object Qotd {
-  case class Config (port: Option[Int] = None)
+  case class Config (port: Int)
+
+  val defaultConfig = new Config(17)
 
   def main(args: Array[String]) = {
-    val config = parseArgs(new Config, args.toList)
+    val config = parseArgs(defaultConfig, args.toList)
 
     val reader = new QuoteReader
-    val port = config.port match {
-      case Some(port) => port
-      case None => 17 // Default port for QOTD servers is 17
-    }
 
-    val tcpThread = startTcpServer(port, reader)
-    val udpThread = startUdpServer(port, reader)
+    val tcpThread = startTcpServer(config.port, reader)
+    val udpThread = startUdpServer(config.port, reader)
 
     tcpThread.join()
     udpThread.join()
@@ -23,7 +21,7 @@ object Qotd {
 
   def parseArgs(config: Config, argList: List[String]): Config = {
     argList match {
-      case "--port" :: port :: tail => parseArgs(config.copy(port = Some(port.toInt)), tail)
+      case "--port" :: port :: tail => parseArgs(config.copy(port = port.toInt), tail)
       case option :: value :: tail => parseArgs(config, tail)
       case option :: Nil => config
       case Nil => config
