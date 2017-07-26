@@ -26,3 +26,7 @@ Ensure that you have sbt installed, and run:
 --quotefile <file> File to get quotes from (Default: quotes.txt)
 --strict           Comply with RFC 865 completely (Default: false)
 ```
+
+## License
+
+[MIT](https://github.com/GunshipPenguin/scalaquote/blob/master/LICENSE) © Rhys Rustad-Elliott
