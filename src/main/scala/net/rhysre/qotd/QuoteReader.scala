@@ -2,9 +2,10 @@ package net.rhysre.scalaquote
 
 import scala.io.Source
 import scala.util.Random
+import java.io.InputStream
 
-class QuoteReader {
-  val lines = Source.fromFile("quotes.txt").mkString.split("%\n")
+class QuoteReader (in: InputStream){
+  val lines = Source.fromInputStream(in).mkString.split("%\n")
   val numQuotes = lines.size
   val rand = new Random
 
