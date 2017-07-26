@@ -27,6 +27,12 @@ Ensure that you have sbt installed, and run:
 --strict           Comply with RFC 865 completely (Default: false)
 ```
 
+## Tests
+
+To run the [ScalaTest](http://www.scalatest.org/) tests, use:
+
+`sbt test`
+
 ## License
 
 [MIT](https://github.com/GunshipPenguin/scalaquote/blob/master/LICENSE) © Rhys Rustad-Elliott
