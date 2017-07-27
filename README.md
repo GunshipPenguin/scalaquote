@@ -9,7 +9,8 @@ by the Unix `fortune` program, allowing fortune cookies to be easily served
 as quotes using the `--quotefile` flag.
 
 ScalaQuote allows quotes of arbitrary length and character set by default, but
-can be instructed to comply completely with RFC865 by using the `--strict` flag, which will cause the server to not serve quotes that are greater than 511 characters
+can be instructed to comply completely with RFC865 by using the `--strict` flag,
+which will cause the server to not serve quotes that are greater than 511 characters
 in length and/or contain non ASCII characters.
 
 ## Running
